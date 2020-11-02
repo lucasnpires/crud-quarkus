@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import com.github.database.rider.cdi.api.DBRider;
+import com.github.database.rider.core.api.configuration.DBUnit;
+import com.github.database.rider.core.api.configuration.Orthography;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.lucasnpires.model.entity.Produto;
 
@@ -16,7 +18,8 @@ import io.quarkus.test.junit.QuarkusTest;
 public class ProdutoTest {
 	
 	@Test
-	@DataSet("produtos1.yml")
+	@DBUnit(schema = "public", caseInsensitiveStrategy = Orthography.LOWERCASE)
+	@DataSet(value= "produtos1.yml")
 	void testeCount() {
 		Assert.assertEquals(1, Produto.count());		
 	}

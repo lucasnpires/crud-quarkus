@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crud-quarkus-jvm
+  namespace: quarkus
+spec:
+  selector:
+    matchLabels:
+      app: crud-quarkus-jvm
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: crud-quarkus-jvm
+    spec:
+      containers:
+        - name: crud-quarkus-jvm
+          image: desenvolvimento.azurecr.io/autorizacao/devops/crud-quarkus-jvm-poc:1.0.1
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 8080
+      imagePullSecrets:
+      - name: desenvolvimento
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cloud.google.com/load-balancer-type: Internal
+    networking.gke.io/internal-load-balancer-allow-global-access: "true"
+  name: crud-quarkus-jvm-svc
+  namespace: quarkus
+  labels:    
+    app: crud-quarkus-jvm
+spec:
+  type: LoadBalancer
+  ports:
+  - name: 8080tcp
+    port: 8080 
+    protocol: TCP
+    targetPort: 8080
+  selector: 
+    app: crud-quarkus-jvm

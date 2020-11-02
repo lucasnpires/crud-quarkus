@@ -12,7 +12,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 @Entity
-@Table(name = "PRODUTO")
 public class Produto extends PanacheEntity {
 	
 	public String nome;

@@ -19,8 +19,6 @@ import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import com.github.lucasnpires.model.entity.Produto;
 import com.github.lucasnpires.model.request.ProdutoRequest;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-
 @Path("produtos")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
